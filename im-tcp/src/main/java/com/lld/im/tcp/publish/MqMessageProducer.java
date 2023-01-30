@@ -10,7 +10,7 @@ import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @description:
+ * @description:  im发送给业务
  * @author: lld
  * @version: 1.0
  */
