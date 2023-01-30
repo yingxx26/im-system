@@ -1,0 +1,9 @@
+/.idea
+/logs
+
+# Project exclude paths
+/im-codec/target/
+/im-common/target/
+/im-message-store/target/
+/im-service/target/
+/im-tcp/target/
