@@ -2,7 +2,6 @@ package com.lld.im.tcp.redis;
 
 import com.lld.im.codec.config.BootstrapConfig;
 import com.lld.im.tcp.reciver.UserLoginMessageListener;
-import com.sun.org.apache.regexp.internal.RE;
 import org.redisson.api.RedissonClient;
 
 /**
