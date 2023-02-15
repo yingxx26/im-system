@@ -185,9 +185,10 @@ public class ImUserviceImpl implements ImUserService {
         if(update1 == 1){
             UserModifyPack pack = new UserModifyPack();
             BeanUtils.copyProperties(req,pack);
+            //多端同步
             messageProducer.sendToUser(req.getUserId(),req.getClientType(),req.getImei(),
                     UserEventCommand.USER_MODIFY,pack,req.getAppId());
-
+            //业务服务回调
             if(appConfig.isModifyUserAfterCallback()){
                 callbackService.callback(req.getAppId(),
                         Constants.CallbackCommand.ModifyUserAfter,

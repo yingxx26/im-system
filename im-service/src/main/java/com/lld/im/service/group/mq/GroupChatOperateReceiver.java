@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
- * @description:
+ * @description:  业务消息接收（群聊）
  * @author: lld
  * @version: 1.0
  */

@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @description:
+ * @description: 消息已读
  * @author: lld
  * @version: 1.0
  */

@@ -29,7 +29,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @description:
+ * @description:  会话
  * @author: lld
  * @version: 1.0
  */

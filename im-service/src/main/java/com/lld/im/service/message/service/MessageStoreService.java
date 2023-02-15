@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @description:
+ * @description:  入库
  * @author: lld
  * @version: 1.0
  */

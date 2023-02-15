@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * @description:
+ * @description:  群聊消息处理
  * @author: lld
  * @version: 1.0
  */
