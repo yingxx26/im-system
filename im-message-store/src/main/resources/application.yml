@@ -33,7 +33,7 @@ spring:
         max-concurrency: 10
         acknowledge-mode: MANUAL
         prefetch: 1
-    publisher-confirms: true
+    #publisher-confirms: true
     publisher-returns: true
     template:
       mandatory: true
