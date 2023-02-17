@@ -124,14 +124,13 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<Message> {
             dto.setAppId(msg.getMessageHeader().getAppId());
             RTopic topic = redissonClient.getTopic(Constants.RedisConstants.UserLoginChannel);
             topic.publish(JSONObject.toJSONString(dto));
-        } else if (command == SystemCommand.LOGOUT.getCommand()) {    //登出  9003
+        } else if (command == SystemCommand.LOGOUT.getCommand()) {      //登出  9003
             //删除session
             //redis 删除
             SessionSocketHolder.removeUserSession((NioSocketChannel) ctx.channel());
-        } else if (command == SystemCommand.PING.getCommand()) { //心跳 9999
-            ctx.channel()
-                    .attr(AttributeKey.valueOf(Constants.ReadTime)).set(System.currentTimeMillis());
-        } else if (command == MessageCommand.MSG_P2P.getCommand()      //单聊消息 1103
+        } else if (command == SystemCommand.PING.getCommand()) {         //心跳 9999
+            ctx.channel().attr(AttributeKey.valueOf(Constants.ReadTime)).set(System.currentTimeMillis());
+        } else if (command == MessageCommand.MSG_P2P.getCommand()         //单聊消息 1103
                 || command == GroupEventCommand.MSG_GROUP.getCommand()) { //群聊消息收发 2104
             //处理消息
             try {

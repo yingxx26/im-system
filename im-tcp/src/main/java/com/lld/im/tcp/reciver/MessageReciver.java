@@ -16,7 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.IOException;
 
 /**
- * @description:  业务监听处理
+ * @description:  业务监听处理（业务专用监听mq）
  * @author: lld
  * @version: 1.0
  */

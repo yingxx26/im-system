@@ -84,7 +84,7 @@ public class SessionSocketHolder {
 
         SessionSocketHolder.remove(appId,userId,clientType,imei);
         RedissonClient redissonClient = RedisManager.getRedissonClient();
-        RMap<Object, Object> map = redissonClient.getMap(appId +
+        RMap<Object,  Object> map = redissonClient.getMap(appId +
                 Constants.RedisConstants.UserSessionConstants + userId);
         map.remove(clientType+":"+imei);
         nioSocketChannel.close();
