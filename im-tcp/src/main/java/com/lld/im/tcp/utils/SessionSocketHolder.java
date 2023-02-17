@@ -80,8 +80,7 @@ public class SessionSocketHolder {
         String userId = (String) nioSocketChannel.attr(AttributeKey.valueOf(Constants.UserId)).get();
         Integer appId = (Integer) nioSocketChannel.attr(AttributeKey.valueOf(Constants.AppId)).get();
         Integer clientType = (Integer) nioSocketChannel.attr(AttributeKey.valueOf(Constants.ClientType)).get();
-        String imei = (String) nioSocketChannel
-                .attr(AttributeKey.valueOf(Constants.Imei)).get();
+        String imei = (String) nioSocketChannel.attr(AttributeKey.valueOf(Constants.Imei)).get();
 
         SessionSocketHolder.remove(appId,userId,clientType,imei);
         RedissonClient redissonClient = RedisManager.getRedissonClient();
