@@ -20,7 +20,8 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 /**
- * @description:
+ * @description: 监听redis的广播消息
+ *
  * 多端同步：1单端登录：一端在线：踢掉除了本clinetType + imel 的设备
  *          2双端登录：允许pc/mobile 其中一端登录 + web端 踢掉除了本clinetType + imel 以外的web端设备
  *        3 三端登录：允许手机+pc+web，踢掉同端的其他imei 除了web
