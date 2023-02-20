@@ -28,7 +28,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 /**
- * @description:  业务消息接收（单聊）
+ * @description:  业务消息接收（单聊，接收im发来的，）
  * @author: lld
  * @version: 1.0
  */

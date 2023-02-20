@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * @description: 发送给别机器上用户   机器id=session.getBrokerId()
+ * @description: 发送给别机器上用户 （IM接收，再发给客户端）  机器id=session.getBrokerId()
  * @author: lld
  * @version: 1.0
  */
