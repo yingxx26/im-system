@@ -131,8 +131,10 @@ public class P2PMessageService {
                 //3.发消息给对方在线端
                 List<ClientInfo> clientInfos = dispatchMessage(messageContent);
 
+
                 messageStoreService.setMessageFromMessageIdCache(messageContent.getAppId(),
                         messageContent.getMessageId(),messageContent);
+                //客户端下线（接收消息一方），服务端代 回ack
                 if(clientInfos.isEmpty()){
                     //发送接收确认给发送方，要带上是服务端发送的标识
                     reciverAck(messageContent);
