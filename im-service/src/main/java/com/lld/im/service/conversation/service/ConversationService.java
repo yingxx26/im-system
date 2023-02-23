@@ -55,6 +55,7 @@ public class ConversationService {
         return type + "_" + fromId + "_" + toId;
     }
 
+    //已读
     public void  messageMarkRead(MessageReadedContent messageReadedContent){
 
         String toId = messageReadedContent.getToId();
@@ -89,7 +90,7 @@ public class ConversationService {
     }
 
     /**
-     * @description: 删除会话
+     * @description: 删除会话（删除客户端）
      * @param
      * @return com.lld.im.common.ResponseVO
      * @author lld
