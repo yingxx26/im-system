@@ -69,7 +69,7 @@ public class ChatOperateReceiver {
                         = jsonObject.toJavaObject(MessageReciveAckContent.class);
                 messageSyncService.receiveMark(messageContent);
             }else if(command.equals(MessageCommand.MSG_READED.getCommand())){
-                //消息接收确认
+                //消息已读（接收方发起）
                 MessageReadedContent messageContent
                         = jsonObject.toJavaObject(MessageReadedContent.class);
                 messageSyncService.readMark(messageContent);
