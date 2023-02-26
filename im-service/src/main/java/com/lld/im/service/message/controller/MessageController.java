@@ -39,6 +39,7 @@ public class MessageController {
                 ,req.getAppId());
     }
 
+//    同步离线数据（登录的时候）
     @RequestMapping("/syncOfflineMessage")
     public ResponseVO syncOfflineMessage(@RequestBody
                                              @Validated SyncReq req, Integer appId)  {

@@ -76,6 +76,7 @@ public class ImUserController {
         return ResponseVO.errorResponse();
     }
 
+    //获取服务端序列号，客户端判断需不需要同步  再调用同步接口，比如 @RequestMapping("/syncFriendshipList")
     @RequestMapping("/getUserSequence")
     public ResponseVO getUserSequence(@RequestBody @Validated
                                               GetUserSequenceReq req, Integer appId) {
