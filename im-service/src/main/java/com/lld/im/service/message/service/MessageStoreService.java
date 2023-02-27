@@ -206,9 +206,7 @@ public class MessageStoreService {
 
         for (String memberId : memberIds) {
             // 找到toId的队列
-            String toKey = offlineMessage.getAppId() + ":" +
-                    Constants.RedisConstants.OfflineMessage + ":" +
-                    memberId;
+            String toKey = offlineMessage.getAppId() + ":" + Constants.RedisConstants.OfflineMessage + ":" +  memberId;
             offlineMessage.setConversationId(conversationService.convertConversationId(
                     ConversationTypeEnum.GROUP.getCode(),memberId,offlineMessage.getToId()
             ));
