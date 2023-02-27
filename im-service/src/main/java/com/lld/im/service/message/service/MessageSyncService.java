@@ -58,6 +58,7 @@ public class MessageSyncService {
         conversationService.messageMarkRead(messageContent);
         MessageReadedPack messageReadedPack = new MessageReadedPack();
         BeanUtils.copyProperties(messageContent,messageReadedPack);
+        //发送给同步方
         syncToSender(messageReadedPack,messageContent,MessageCommand.MSG_READED_NOTIFY);
         //发送给对方
         messageProducer.sendToUser(messageContent.getToId(),
