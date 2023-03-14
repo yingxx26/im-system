@@ -5,7 +5,7 @@ import lombok.Data;
 
 /**
  * @author: Chackylee
- * @description:
+ * @description: 消息体
  **/
 @Data
 @TableName("im_message_body")
