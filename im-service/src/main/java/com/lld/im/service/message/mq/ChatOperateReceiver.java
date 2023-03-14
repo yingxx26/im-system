@@ -62,9 +62,9 @@ public class ChatOperateReceiver {
                 //处理消息
                 MessageContent messageContent
                         = jsonObject.toJavaObject(MessageContent.class);
-                p2PMessageService.process(messageContent);
+                p2PMessageService.process(messageContent);//（接收方（客户端）ack，消息不丢失）
             }else if(command.equals(MessageCommand.MSG_RECIVE_ACK.getCommand())){
-                //消息接收确认
+                //消息接收确认（服务端ack，消息不丢失）
                 MessageReciveAckContent messageContent
                         = jsonObject.toJavaObject(MessageReciveAckContent.class);
                 messageSyncService.receiveMark(messageContent);

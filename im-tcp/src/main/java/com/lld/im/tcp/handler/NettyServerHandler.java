@@ -172,6 +172,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<Message> {
                 e.printStackTrace();
             }
         } else {
+            //包括  发送ack到客户端
             MqMessageProducer.sendMessage(msg, command);
         }
 
