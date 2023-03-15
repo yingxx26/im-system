@@ -17,7 +17,7 @@ public enum MessageCommand implements Command {
     //消息已读通知给同步端（客户端消息发送给同步端）  1053
     MSG_READED_NOTIFY(0x41D),
 
-    //消息已读回执，给原消息发送方（）  1054
+    //消息已读回执，给原消息发送方（真正已读）  1054
     MSG_READED_RECEIPT(0x41E),
 
     ;

@@ -85,11 +85,12 @@ public class P2PMessageService {
         String fromId = messageContent.getFromId();
         String toId = messageContent.getToId();
         Integer appId = messageContent.getAppId();
-
+        //消息幂等
         MessageContent messageFromMessageIdCache = messageStoreService.getMessageFromMessageIdCache
                 (messageContent.getAppId(), messageContent.getMessageId(),MessageContent.class);
         if (messageFromMessageIdCache != null){
             threadPoolExecutor.execute(() ->{
+                //和下面比，没有保存消息messageStoreService.storeP2PMessage(messageContent);
                 ack(messageContent,ResponseVO.successResponse());
                 //2.发消息给同步在线端
                 syncToSender(messageFromMessageIdCache,messageFromMessageIdCache);
@@ -131,7 +132,7 @@ public class P2PMessageService {
                 //3.发消息给对方在线端
                 List<ClientInfo> clientInfos = dispatchMessage(messageContent);
 
-
+                //消息幂等
                 messageStoreService.setMessageFromMessageIdCache(messageContent.getAppId(),
                         messageContent.getMessageId(),messageContent);
                 //客户端下线（接收消息一方），服务端代 回ack
