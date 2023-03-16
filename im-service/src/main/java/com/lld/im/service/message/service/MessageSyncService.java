@@ -55,6 +55,7 @@ public class MessageSyncService {
      * @author lld
      */
     public void readMark(MessageReadedContent messageContent) {
+        //用做和app同步数据用
         conversationService.messageMarkRead(messageContent);
         MessageReadedPack messageReadedPack = new MessageReadedPack();
         BeanUtils.copyProperties(messageContent,messageReadedPack);
