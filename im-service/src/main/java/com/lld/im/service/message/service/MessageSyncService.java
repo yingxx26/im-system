@@ -55,6 +55,7 @@ public class MessageSyncService {
      * @author lld
      */
     public void readMark(MessageReadedContent messageContent) {
+        //用做和app同步数据用
         conversationService.messageMarkRead(messageContent);
         MessageReadedPack messageReadedPack = new MessageReadedPack();
         BeanUtils.copyProperties(messageContent,messageReadedPack);
@@ -106,6 +107,7 @@ public class MessageSyncService {
 
         Set<ZSetOperations.TypedTuple> querySet = zSetOperations.rangeByScoreWithScores(key,
                 req.getLastSequence(), maxSeq, 0, req.getMaxLimit());
+        //查req.getLastSequence()到maxSeq的数据，一次查req.getMaxLimit()条
         for (ZSetOperations.TypedTuple<String> typedTuple : querySet) {
             String value = typedTuple.getValue();
             OfflineMessageContent offlineMessageContent = JSONObject.parseObject(value, OfflineMessageContent.class);
