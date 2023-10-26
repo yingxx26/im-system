@@ -480,6 +480,7 @@ public class ImGroupServiceImpl implements ImGroupService {
     @Override
     public Long getUserGroupMaxSeq(String userId, Integer appId) {
 
+        //获取加入的群聊
         ResponseVO<Collection<String>> memberJoinedGroup = groupMemberService.syncMemberJoinedGroup(userId, appId);
         if(!memberJoinedGroup.isOk()){
             throw new ApplicationException(500,"");

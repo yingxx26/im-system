@@ -112,10 +112,12 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<Message> {
             RMap<String, String> map = redissonClient.getMap(msg.getMessageHeader().getAppId() + Constants.RedisConstants.UserSessionConstants + loginPack.getUserId());
             map.put(msg.getMessageHeader().getClientType() + ":" + msg.getMessageHeader().getImei()
                     , JSONObject.toJSONString(userSession));
+
             SessionSocketHolder
                     .put(msg.getMessageHeader().getAppId()
                             , loginPack.getUserId(),
                             msg.getMessageHeader().getClientType(), msg.getMessageHeader().getImei(), (NioSocketChannel) ctx.channel());
+
             //redis广播  解决多端登录
             UserClientDto dto = new UserClientDto();
             dto.setImei(msg.getMessageHeader().getImei());
