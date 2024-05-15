@@ -45,7 +45,6 @@ public class BeanConfig {
 
         RouteHandle routeHandle = (RouteHandle) Class.forName(routWay).newInstance();
         if(handler == ImUrlRouteWayEnum.HASH){
-c
             Method setHash = Class.forName(routWay).getMethod("setHash", AbstractConsistentHash.class);
             Integer consistentHashWay = appConfig.getConsistentHashWay();
             String hashWay = "";
