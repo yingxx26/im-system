@@ -27,9 +27,9 @@ public class TreeMapConsistentHash extends AbstractConsistentHash {
 
 
     @Override
-    protected String getFirstNodeValue(String value) {
+    protected String getFirstNodeValue(String key) {
 
-        Long hashkey = super.hash(value);
+        Long hashkey = super.hash(key);
         //此方法返回此映射，其键大于或等于hash的部分视图。
         SortedMap<Long, String> last = treeMap.tailMap(hashkey);
         if (!last.isEmpty()) {

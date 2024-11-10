@@ -90,9 +90,11 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<Message> {
             ctx.channel().attr(AttributeKey.valueOf(Constants.Imei))
                     .set(msg.getMessageHeader().getImei());
             //将channel存起来
+            SessionSocketHolder.
+                    put(msg.getMessageHeader().getAppId() , loginPack.getUserId(), msg.getMessageHeader().getClientType(), msg.getMessageHeader().getImei(),
+                        (NioSocketChannel) ctx.channel());
 
-            //Redis map
-
+            //用户session  Redis map
             UserSession userSession = new UserSession();
             userSession.setAppId(msg.getMessageHeader().getAppId());
             userSession.setClientType(msg.getMessageHeader().getClientType());
@@ -107,15 +109,12 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<Message> {
                 e.printStackTrace();
             }
 
-            //存到redis  解决集群转发
+            //session存到redis  解决集群转发
             RedissonClient redissonClient = RedisManager.getRedissonClient();
             RMap<String, String> map = redissonClient.getMap(msg.getMessageHeader().getAppId() + Constants.RedisConstants.UserSessionConstants + loginPack.getUserId());
             map.put(msg.getMessageHeader().getClientType() + ":" + msg.getMessageHeader().getImei()
                     , JSONObject.toJSONString(userSession));
-            SessionSocketHolder
-                    .put(msg.getMessageHeader().getAppId()
-                            , loginPack.getUserId(),
-                            msg.getMessageHeader().getClientType(), msg.getMessageHeader().getImei(), (NioSocketChannel) ctx.channel());
+
             //redis广播  解决多端登录
             UserClientDto dto = new UserClientDto();
             dto.setImei(msg.getMessageHeader().getImei());

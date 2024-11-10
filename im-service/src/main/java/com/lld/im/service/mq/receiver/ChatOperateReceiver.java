@@ -57,12 +57,12 @@ public class ChatOperateReceiver {
             JSONObject jsonObject = JSON.parseObject(msg);
             Integer command = jsonObject.getInteger("command");
             if(command.equals(MessageCommand.MSG_P2P.getCommand())){
-                //处理消息
+                //处理消息 //（保存消息，ack自己 和 发给对方 、对方不在线服务端ack）
                 MessageContent messageContent
                         = jsonObject.toJavaObject(MessageContent.class);
-                p2PMessageService.process(messageContent);//（接收方（客户端）ack，消息不丢失）
+                p2PMessageService.process(messageContent);
             }else if(command.equals(MessageCommand.MSG_RECIVE_ACK.getCommand())){
-                //消息接收确认（服务端ack，消息不丢失）
+                //消息接收确认（接收方 反向ack，消息不丢失）
                 MessageReciveAckContent messageContent
                         = jsonObject.toJavaObject(MessageReciveAckContent.class);
                 messageSyncService.receiveMark(messageContent);

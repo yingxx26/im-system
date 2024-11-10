@@ -90,6 +90,7 @@ public class P2PMessageService {
         if (messageFromMessageIdCache != null){
             threadPoolExecutor.execute(() ->{
                 //和下面比，没有保存消息messageStoreService.storeP2PMessage(messageContent);
+                //1.发消息给自己
                 ack(messageContent,ResponseVO.successResponse());
                 //2.发消息给同步在线端
                 syncToSender(messageFromMessageIdCache,messageFromMessageIdCache);
