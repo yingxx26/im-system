@@ -1,4 +1,4 @@
-package com.lld.im.service.utils;
+package com.lld.im.service.mq.producer;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lld.im.codec.pack.group.AddGroupMemberPack;

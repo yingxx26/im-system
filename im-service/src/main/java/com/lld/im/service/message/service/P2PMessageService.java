@@ -2,7 +2,6 @@ package com.lld.im.service.message.service;
 
 import com.lld.im.codec.pack.message.ChatMessageAck;
 import com.lld.im.codec.pack.message.MessageReciveServerAckPack;
-import com.lld.im.codec.proto.Message;
 import com.lld.im.common.ResponseVO;
 import com.lld.im.common.constant.Constants;
 import com.lld.im.common.enums.ConversationTypeEnum;
@@ -14,7 +13,7 @@ import com.lld.im.service.message.model.req.SendMessageReq;
 import com.lld.im.service.message.model.resp.SendMessageResp;
 import com.lld.im.service.seq.RedisSeq;
 import com.lld.im.service.utils.ConversationIdGenerate;
-import com.lld.im.service.utils.MessageProducer;
+import com.lld.im.service.mq.producer.MessageProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;

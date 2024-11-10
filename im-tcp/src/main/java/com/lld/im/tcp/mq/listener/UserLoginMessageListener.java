@@ -1,4 +1,4 @@
-package com.lld.im.tcp.reciver;
+package com.lld.im.tcp.mq.listener;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lld.im.codec.proto.MessagePack;
@@ -7,7 +7,6 @@ import com.lld.im.common.constant.Constants;
 import com.lld.im.common.enums.DeviceMultiLoginEnum;
 import com.lld.im.common.enums.command.SystemCommand;
 import com.lld.im.common.model.UserClientDto;
-import com.lld.im.tcp.handler.NettyServerHandler;
 import com.lld.im.tcp.redis.RedisManager;
 import com.lld.im.tcp.utils.SessionSocketHolder;
 import io.netty.channel.socket.nio.NioSocketChannel;

@@ -1,4 +1,4 @@
-package com.lld.im.tcp.publish;
+package com.lld.im.tcp.mq.producer;
 
 
 import com.alibaba.fastjson.JSON;

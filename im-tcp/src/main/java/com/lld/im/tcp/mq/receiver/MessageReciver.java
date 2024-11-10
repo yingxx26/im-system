@@ -1,4 +1,4 @@
-package com.lld.im.tcp.reciver;
+package com.lld.im.tcp.mq.receiver;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lld.im.codec.proto.MessagePack;

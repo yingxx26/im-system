@@ -1,7 +1,7 @@
 package com.lld.im.tcp;
 
 import com.lld.im.codec.config.BootstrapConfig;
-import com.lld.im.tcp.reciver.MessageReciver;
+import com.lld.im.tcp.mq.receiver.MessageReciver;
 import com.lld.im.tcp.redis.RedisManager;
 import com.lld.im.tcp.register.RegistryZK;
 import com.lld.im.tcp.register.ZKit;

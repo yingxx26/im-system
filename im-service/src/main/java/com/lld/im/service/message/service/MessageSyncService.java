@@ -14,7 +14,7 @@ import com.lld.im.common.model.message.MessageReadedContent;
 import com.lld.im.common.model.message.MessageReciveAckContent;
 import com.lld.im.common.model.message.OfflineMessageContent;
 import com.lld.im.service.conversation.service.ConversationService;
-import com.lld.im.service.utils.MessageProducer;
+import com.lld.im.service.mq.producer.MessageProducer;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.DefaultTypedTuple;

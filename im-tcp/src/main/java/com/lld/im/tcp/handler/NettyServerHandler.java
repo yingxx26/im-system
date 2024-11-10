@@ -17,7 +17,7 @@ import com.lld.im.common.model.UserClientDto;
 import com.lld.im.common.model.UserSession;
 import com.lld.im.common.model.message.CheckSendMessageReq;
 import com.lld.im.tcp.feign.FeignMessageService;
-import com.lld.im.tcp.publish.MqMessageProducer;
+import com.lld.im.tcp.mq.producer.MqMessageProducer;
 import com.lld.im.tcp.redis.RedisManager;
 import com.lld.im.tcp.utils.SessionSocketHolder;
 import feign.Feign;
