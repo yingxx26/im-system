@@ -85,29 +85,23 @@ public class P2PMessageService {
         String fromId = messageContent.getFromId();
         String toId = messageContent.getToId();
         Integer appId = messageContent.getAppId();
-        //消息幂等
+        //消息幂等，如果5分钟内发过，则不持久化
         MessageContent messageFromMessageIdCache = messageStoreService.getMessageFromMessageIdCache
                 (messageContent.getAppId(), messageContent.getMessageId(),MessageContent.class);
         if (messageFromMessageIdCache != null){
-            threadPoolExecutor.execute(() ->{
-                //和下面比，没有保存消息messageStoreService.storeP2PMessage(messageContent);
-                //1.发消息给自己
-                ack(messageContent,ResponseVO.successResponse());
-                //2.发消息给同步在线端
-                syncToSender(messageFromMessageIdCache,messageFromMessageIdCache);
-                //3.发消息给对方在线端
-                List<ClientInfo> clientInfos = dispatchMessage(messageFromMessageIdCache);
-                if(clientInfos.isEmpty()){
-                    //发送接收确认给发送方，要带上是服务端发送的标识
-                    reciverAck(messageFromMessageIdCache);
-                }
-            });
+            //发送消息  service->im->客户端
+            doSendMessage(messageContent, messageFromMessageIdCache);
             return;
         }
+        //保存并发送消息
+        doSendAndPersistMessage(messageContent);
+    }
 
+    private void doSendAndPersistMessage(MessageContent messageContent) {
+        //序列号用于客户端排序
         long seq = redisSeq.doGetSeq(messageContent.getAppId() + ":"
                 + Constants.SeqConstants.Message+ ":" + ConversationIdGenerate.generateP2PId(
-                messageContent.getFromId(),messageContent.getToId()
+                messageContent.getFromId(), messageContent.getToId()
         ));
         messageContent.setMessageSequence(seq);
 
@@ -116,37 +110,54 @@ public class P2PMessageService {
         //发送方和接收方是否是好友
 //        ResponseVO responseVO = imServerPermissionCheck(fromId, toId, appId);
 //        if(responseVO.isOk()){
-            threadPoolExecutor.execute(() ->{
-                //appId + Seq + (from + to) groupId
-                messageStoreService.storeP2PMessage(messageContent);
+        threadPoolExecutor.execute(() ->{
+            //appId + Seq + (from + to) groupId
+            messageStoreService.storeP2PMessage(messageContent);
 
-                OfflineMessageContent offlineMessageContent = new OfflineMessageContent();
-                BeanUtils.copyProperties(messageContent,offlineMessageContent);
-                offlineMessageContent.setConversationType(ConversationTypeEnum.P2P.getCode());
-                messageStoreService.storeOfflineMessage(offlineMessageContent);
+            OfflineMessageContent offlineMessageContent = new OfflineMessageContent();
+            BeanUtils.copyProperties(messageContent,offlineMessageContent);
+            offlineMessageContent.setConversationType(ConversationTypeEnum.P2P.getCode());
+            messageStoreService.storeOfflineMessage(offlineMessageContent);
 
-                //插入数据
-                //1.回ack成功给自己
-                ack(messageContent,ResponseVO.successResponse());
-                //2.发消息给同步在线端
-                syncToSender(messageContent,messageContent);
-                //3.发消息给对方在线端
-                List<ClientInfo> clientInfos = dispatchMessage(messageContent);
+            //插入数据
+            //1.回ack成功给自己
+            ack(messageContent,ResponseVO.successResponse());
+            //2.发消息给同步在线端
+            syncToSender(messageContent, messageContent);
+            //3.发消息给对方在线端
+            List<ClientInfo> clientInfos = dispatchMessage(messageContent);
 
-                //消息幂等
-                messageStoreService.setMessageFromMessageIdCache(messageContent.getAppId(),
-                        messageContent.getMessageId(),messageContent);
-                //客户端下线（接收消息一方），服务端代 回ack
-                if(clientInfos.isEmpty()){
-                    //发送接收确认给发送方，要带上是服务端发送的标识
-                    reciverAck(messageContent);
-                }
-            });
+            //消息幂等（缓存） //客户端传的messageId
+            messageStoreService.setMessageFromMessageIdCache(messageContent.getAppId(),
+                    messageContent.getMessageId(), messageContent);
+            //客户端下线（接收消息一方），服务端代 回ack
+            if(clientInfos.isEmpty()){
+                //发送接收确认给发送方，要带上是服务端发送的标识
+                reciverAck(messageContent);
+            }
+        });
 //        }else{
 //            //告诉客户端失败了
 //            //ack
 //            ack(messageContent,responseVO);
 //        }
+    }
+
+    private void doSendMessage(MessageContent messageContent, MessageContent messageFromMessageIdCache) {
+        threadPoolExecutor.execute(() ->{
+            //和下面比，没有保存消息messageStoreService.storeP2PMessage(messageContent);
+            //1.发消息给自己
+            ack(messageContent,ResponseVO.successResponse());
+            //2.发消息给同步在线端
+            syncToSender(messageFromMessageIdCache, messageFromMessageIdCache);
+            //3.发消息给对方在线端
+            List<ClientInfo> clientInfos = dispatchMessage(messageFromMessageIdCache);
+            if(clientInfos.isEmpty()){
+                //发送接收确认给发送方，要带上是服务端发送的标识
+                reciverAck(messageFromMessageIdCache);
+            }
+        });
+        return;
     }
 
     private List<ClientInfo> dispatchMessage(MessageContent messageContent){

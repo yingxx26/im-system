@@ -135,7 +135,7 @@ public class MessageStoreService {
     }
 
     public void setMessageFromMessageIdCache(Integer appId,String messageId,Object messageContent){
-        //appid : cache : messageId
+        //appid : cache : messageId //客户端传的messageId
         String key =appId + ":" + Constants.RedisConstants.cacheMessage + ":" + messageId;
         stringRedisTemplate.opsForValue().set(key,JSONObject.toJSONString(messageContent),300, TimeUnit.SECONDS);
     }

@@ -33,6 +33,7 @@ public class MessageController {
         return ResponseVO.successResponse(p2PMessageService.send(req));
     }
 
+    //接受im fegin的调用
     @RequestMapping("/checkSend")
     public ResponseVO checkSend(@RequestBody @Validated CheckSendMessageReq req)  {
         return p2PMessageService.imServerPermissionCheck(req.getFromId(),req.getToId()
