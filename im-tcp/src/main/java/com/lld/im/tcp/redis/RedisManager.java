@@ -1,7 +1,7 @@
 package com.lld.im.tcp.redis;
 
 import com.lld.im.codec.config.BootstrapConfig;
-import com.lld.im.tcp.reciver.UserLoginMessageListener;
+import com.lld.im.tcp.mq.listener.UserLoginMessageListener;
 import org.redisson.api.RedissonClient;
 
 /**

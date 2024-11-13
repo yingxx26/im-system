@@ -1,13 +1,12 @@
-package com.lld.im.service.utils;
+package com.lld.im.service.mq.producer;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lld.im.codec.proto.MessagePack;
-import com.lld.im.common.ClientType;
 import com.lld.im.common.constant.Constants;
 import com.lld.im.common.enums.command.Command;
 import com.lld.im.common.model.ClientInfo;
 import com.lld.im.common.model.UserSession;
-import jdk.nashorn.internal.scripts.JO;
+import com.lld.im.service.utils.UserSessionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +19,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ *  发送给im
  * @description: 发送给别机器上用户 （IM接收，再发给客户端）  机器id=session.getBrokerId()
  * @author: lld
  * @version: 1.0

@@ -1,4 +1,4 @@
-package com.lld.im.service.message.mq;
+package com.lld.im.service.mq.receiver;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -22,9 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
-import sun.nio.cs.ext.MS874;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 /**

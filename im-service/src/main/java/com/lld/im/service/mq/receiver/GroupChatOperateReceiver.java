@@ -1,16 +1,14 @@
-package com.lld.im.service.group.mq;
+package com.lld.im.service.mq.receiver;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.lld.im.common.constant.Constants;
 import com.lld.im.common.enums.command.GroupEventCommand;
-import com.lld.im.common.enums.command.MessageCommand;
 import com.lld.im.common.model.message.GroupChatMessageContent;
 import com.lld.im.common.model.message.MessageReadedContent;
 import com.lld.im.service.group.service.GroupMessageService;
 import com.lld.im.service.message.service.MessageSyncService;
-import com.lld.im.service.message.service.P2PMessageService;
 import com.rabbitmq.client.Channel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
